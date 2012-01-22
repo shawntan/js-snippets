@@ -64,6 +64,7 @@ var DPTable = function(container_id,height,width,row_desc,col_desc) {
 	};
 	var comment = document.createElement("div");
 	comment.style['float'] = "right";
+	comment.style.height = "20px";
 	this.$ = function(i,j,value,text){
 		if(value!=null) set(i,j,value)
 		else return get(i,j);
@@ -89,8 +90,8 @@ var DPTable = function(container_id,height,width,row_desc,col_desc) {
 			this.innerHTML = "Start";
 		}
 	}
-	document.getElementById(container_id).appendChild(btn_start);
 	document.getElementById(container_id).appendChild(comment);
+	document.getElementById(container_id).appendChild(btn_start);
 
 }
 

@@ -20,16 +20,16 @@
 		<script>
 			//problem definition
 			var items = [
-				{name:"A",	weight:2,	value:1		},
-				{name:"B",	weight:3,	value:5		},
-				{name:"C",	weight:3,	value:4		},
-				{name:"D",	weight:2,	value:2		},
-				{name:"E",	weight:1,	value:3		}
+				{name:"A",	weight:2,	value:1	},
+				{name:"B",	weight:3,	value:5	},
+				{name:"C",	weight:3,	value:4	},
+				{name:"D",	weight:2,	value:2	},
+				{name:"E",	weight:1,	value:3	}
 			]
 
 			var capacity = 7;
 			M = new DPTable('test',items.length+1,capacity+1,
-			function(i) {return i>0?items[i-1].name +" "+items[i-1].weight+" "+items[i-1].value:"";}
+				function(i) {return i>0?items[i-1].name +" "+items[i-1].weight+" "+items[i-1].value:"";}
 			);
 			for(var i=0;i<items.length+1;i++){
 				for(var j=0;j<capacity+1;j++){
