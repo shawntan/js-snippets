@@ -31,6 +31,7 @@ var DPTable = function(container_id,height,width,row_desc,col_desc) {
 		}
 	}
 	document.getElementById(container_id).appendChild(table_gui);
+
 	function set(i,j,value) {
 		table[i][j].value = value;
 		add(function() {
@@ -47,23 +48,49 @@ var DPTable = function(container_id,height,width,row_desc,col_desc) {
 		});
 		return table[i][j].value;
 	}
-	this.mark =  function(i,j) {
-		add(function() {table[i][j].style.backgroundColor = "#FFDDAA";});
+	this.mark =  function(i,j,text) {
+		add(function() {
+			table[i][j].style.backgroundColor = "#FFDDAA";
+			if(text) comment.innerHTML = text;
+		});
 	};
 
-	function add(ani) {event_queue.push(ani); if (!running) run()}
+	function add(ani) {event_queue.push(ani);}
 	function run() {
-		running = true;
 		setTimeout(function(){
 			event_queue.shift()();
-			if(event_queue.length>0) run();
-			else running = false;
+			if(running && event_queue.length>0) run();
 		},DELAY);
-	}
-
-	this.$ = function(i,j,value){
+	};
+	var comment = document.createElement("div");
+	comment.style['float'] = "right";
+	this.$ = function(i,j,value,text){
 		if(value!=null) set(i,j,value)
 		else return get(i,j);
+	};
+	var start = function(){
+		if(event_queue.length > 0) {
+			running = true;
+			run();
+		}
+	};
+	var pause = function() {
+		running = false;
 	}
+	var btn_start = document.createElement("button");
+	btn_start.type = "button";
+	btn_start.innerHTML = "Start";
+	btn_start.onclick = function() {
+		if(!running) {
+			start();
+			this.innerHTML = "Pause";
+		} else {
+			pause();
+			this.innerHTML = "Start";
+		}
+	}
+	document.getElementById(container_id).appendChild(btn_start);
+	document.getElementById(container_id).appendChild(comment);
+
 }
 
